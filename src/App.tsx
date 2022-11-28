@@ -4,26 +4,21 @@ import "./App.css";
 function App() {
   async function handleCreateUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    const target = e.target as HTMLFormElement;
 
-    const { name, email, password } = e.target as typeof e.target & {
-      name: { value: string };
-      email: { value: string };
-      password: { value: string };
-    };
+    const formData = new FormData(target);
+    const dataObject = Object.fromEntries(formData);
 
     await axios
-      .post(`${import.meta.env.VITE_API_URL}/signup`, {
-        name: name.value,
-        email: email.value,
-        password: password.value,
-      })
+      .post(`${import.meta.env.VITE_API_URL}/signup`, dataObject)
       .then((res) => {
         console.log(res);
       })
       .catch((e) => {
         console.log(e);
       });
-    (e.target as HTMLFormElement).reset();
+
+    target.reset();
   }
 
   return (
