@@ -1,19 +1,21 @@
 import axios from "axios";
-import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  async function handleCreateUser(e: React.FormEvent) {
+  async function handleCreateUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    const { name, email, password } = e.target as typeof e.target & {
+      name: { value: string };
+      email: { value: string };
+      password: { value: string };
+    };
+
     await axios
-      .post("http://localhost:5000/signup", {
-        name: name,
-        email: email,
-        password: password,
+      .post(`${import.meta.env.VITE_API_URL}/signup`, {
+        name: name.value,
+        email: email.value,
+        password: password.value,
       })
       .then((res) => {
         console.log(res);
@@ -21,9 +23,7 @@ function App() {
       .catch((e) => {
         console.log(e);
       });
-    setName("");
-    setEmail("");
-    setPassword("");
+    (e.target as HTMLFormElement).reset();
   }
 
   return (
@@ -31,37 +31,11 @@ function App() {
       <h1>Create an account</h1>
       <form onSubmit={handleCreateUser}>
         <label htmlFor="user-name">Name</label>
-        <input
-          type="text"
-          name="user-name"
-          id="user-name"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setName(e.target.value);
-          }}
-          value={name}
-        />
+        <input type="text" name="name" id="user-name" />
         <label htmlFor="user-email">Email</label>
-        <input
-          type="email"
-          name="user-email"
-          id="user-email"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setEmail(e.target.value);
-          }}
-          value={email}
-          required
-        />
+        <input type="email" name="email" id="user-email" required />
         <label htmlFor="user-password">Password</label>
-        <input
-          type="password"
-          name="user-password"
-          id="user-password"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setPassword(e.target.value);
-          }}
-          value={password}
-          required
-        />
+        <input type="password" name="password" id="user-password" required />
         <button>Create Account</button>
       </form>
     </div>
