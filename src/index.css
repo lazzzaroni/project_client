@@ -33,7 +33,8 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
+  font-weight: 700;
   line-height: 1.1;
 }
 
@@ -48,12 +49,20 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+
+button:hover,
+input:hover {
   border-color: #646cff;
 }
 button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button:focus-visible,
+input:focus,
+input:focus-visible {
+  outline: 4px auto #646cff;
+}
+
+input:active {
+  border-color: #646cff;
 }
 
 @media (prefers-color-scheme: light) {
