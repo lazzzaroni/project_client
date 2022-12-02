@@ -1,7 +1,7 @@
 import axios from "axios";
-import "./App.css";
+import "./LoginForm.css";
 
-function App() {
+export const LoginForm = () => {
   async function handleCreateUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
@@ -35,6 +35,4 @@ function App() {
       </form>
     </div>
   );
-}
-
-export default App;
+};
