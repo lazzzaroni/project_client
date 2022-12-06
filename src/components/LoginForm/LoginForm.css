@@ -1,7 +1,17 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  margin-top: 4rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  min-width: 320px;
 }
 
 form label {
@@ -17,5 +27,5 @@ form input {
 }
 
 form button {
-  margin: 1rem;
+  margin: 3rem;
 }

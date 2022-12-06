@@ -22,7 +22,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <div className="App">
+    <section className="container">
       <h1>Create an account</h1>
       <form onSubmit={handleCreateUser}>
         <label htmlFor="user-email">Email</label>
@@ -31,6 +31,6 @@ export const LoginForm = () => {
         <input type="password" name="password" id="user-password" required />
         <button>Create Account</button>
       </form>
-    </div>
+    </section>
   );
 };

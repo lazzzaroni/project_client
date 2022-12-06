@@ -1,5 +1,9 @@
-import { LoginForm } from "@/components";
+import { Header, LoginForm } from "@/components";
 
 export const Login = () => {
-  return <LoginForm />;
+  return (
+    <>
+      <LoginForm />
+    </>
+  );
 };
