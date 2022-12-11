@@ -1,7 +1,11 @@
 import axios from "axios";
-import "./App.css";
+import "./LoginForm.css";
 
-function App() {
+interface LoginFormProps {
+  setToken: Function;
+}
+
+export const LoginForm = ({ setToken }: LoginFormProps) => {
   async function handleCreateUser(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
@@ -12,7 +16,11 @@ function App() {
     await axios
       .post(`${import.meta.env.VITE_API_URL}/signup`, dataObject)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
+        if (res.data.token.length > 0) {
+          sessionStorage.setItem("token", res.data.token);
+          setToken(res.data.token);
+        }
       })
       .catch((e) => {
         console.log(e);
@@ -22,19 +30,15 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Create an account</h1>
+    <section className="container">
+      <h1>Login or create an account</h1>
       <form onSubmit={handleCreateUser}>
-        <label htmlFor="user-name">Name</label>
-        <input type="text" name="name" id="user-name" />
         <label htmlFor="user-email">Email</label>
         <input type="email" name="email" id="user-email" required />
         <label htmlFor="user-password">Password</label>
         <input type="password" name="password" id="user-password" required />
-        <button>Create Account</button>
+        <button>Submit</button>
       </form>
-    </div>
+    </section>
   );
-}
-
-export default App;
+};
