@@ -27,5 +27,9 @@ form input {
 }
 
 form button {
-  margin: 3rem;
+  margin: 3rem 3rem 0;
+}
+
+form button:last-child {
+  margin: 1rem 3rem;
 }

@@ -6,28 +6,31 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ setToken }: LoginFormProps) => {
-  async function handleCreateUser(e: React.FormEvent<HTMLFormElement>) {
+  const handleCreateUser = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const target = e.target as HTMLFormElement;
+    const clicked = document.activeElement as HTMLButtonElement;
 
-    const formData = new FormData(target);
-    const dataObject = Object.fromEntries(formData);
+    if (clicked) {
+      const target = e.target as HTMLFormElement;
 
-    await axios
-      .post(`${import.meta.env.VITE_API_URL}/signup`, dataObject)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data.token.length > 0) {
-          sessionStorage.setItem("token", res.data.token);
-          setToken(res.data.token);
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+      const formData = new FormData(target);
+      const dataObject = Object.fromEntries(formData);
 
-    target.reset();
-  }
+      await axios
+        .post(`${import.meta.env.VITE_API_URL}${clicked.name}`, dataObject)
+        .then((res) => {
+          if (res.data.token.length > 0) {
+            sessionStorage.setItem("token", res.data.token);
+            setToken(res.data.token);
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+      target.reset();
+    }
+  };
 
   return (
     <section className="container">
@@ -37,7 +40,8 @@ export const LoginForm = ({ setToken }: LoginFormProps) => {
         <input type="email" name="email" id="user-email" required />
         <label htmlFor="user-password">Password</label>
         <input type="password" name="password" id="user-password" required />
-        <button>Submit</button>
+        <button name="signin">Login</button>
+        <button name="signup">Create</button>
       </form>
     </section>
   );
