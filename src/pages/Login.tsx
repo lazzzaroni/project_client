@@ -1,8 +1,7 @@
 import { LoginForm } from "@/components";
-import { createContext, ReactElement, useEffect, useState } from "react";
+import { TokenContext } from "@/context/tokenContext";
+import { ReactElement, useEffect, useState } from "react";
 import { Landing } from "./Landing";
-
-export const TokenContext = createContext<string | null>(null);
 
 export const Login = () => {
   const [token, setToken] = useState<string | null>(null);
