@@ -8,8 +8,9 @@ export const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/" element={<Login />}>
+          <Route path="/user" element={<User />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

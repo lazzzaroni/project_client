@@ -1,6 +1,7 @@
 import { Header } from "@/components";
 import { TokenContext } from "@/context/tokenContext";
 import { useContext } from "react";
+import { Outlet } from "react-router-dom";
 
 export const Landing = () => {
   const token = useContext(TokenContext);
@@ -8,8 +9,7 @@ export const Landing = () => {
   return (
     <>
       <Header />
-      <h1>Home page</h1>
-      {token ? <p>Token has been saved</p> : null}
+      <Outlet />
     </>
   );
 };
