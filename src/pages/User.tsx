@@ -1,10 +1,12 @@
 import { TokenContext } from "@/context/tokenContext";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
+import { Form } from "react-router-dom";
 
 interface IUser {
   _id: string;
   email: string;
+  name?: string;
 }
 
 export const User = () => {
@@ -31,8 +33,22 @@ export const User = () => {
 
   return (
     <>
-      <p>id: {userData?._id}</p>
-      <p>email: {userData?.email}</p>
+      <Form method="post">
+        <label htmlFor="name">
+          <span>Name</span>
+          <input type="text" name="name" defaultValue={userData?.name} />
+        </label>
+        <label htmlFor="email">
+          <span>Email</span>
+          <input
+            type="text"
+            name="email"
+            defaultValue={userData?.email}
+            disabled
+          />
+        </label>
+        <button type="submit">Save</button>
+      </Form>
     </>
   );
 };
