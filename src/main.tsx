@@ -14,7 +14,7 @@ import User from "./pages/User";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Login />}>
-      <Route path="/user" element={<User />} />
+      <Route path="user" element={<User />} />
     </Route>
   )
 );
