@@ -31,9 +31,23 @@ export const User = () => {
     getUserData();
   }, []);
 
+  const handleUpdate = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    const formData = new FormData(target);
+    const dataObject = Object.fromEntries(formData);
+
+    await axios.patch(`${import.meta.env.VITE_API_URL}api/user`, dataObject, {
+      headers: {
+        Authorization: `Basic ${token}`,
+      },
+    });
+    alert("Name has been updated successfully!");
+  };
+
   return (
     <>
-      <Form method="post">
+      <form onSubmit={handleUpdate}>
         <label htmlFor="name">
           <span>Name</span>
           <input type="text" name="name" defaultValue={userData?.name} />
@@ -47,8 +61,8 @@ export const User = () => {
             disabled
           />
         </label>
-        <button type="submit">Save</button>
-      </Form>
+        <button>Update</button>
+      </form>
     </>
   );
 };
