@@ -37,12 +37,16 @@ export const User = () => {
     const formData = new FormData(target);
     const dataObject = Object.fromEntries(formData);
 
-    await axios.patch(`${import.meta.env.VITE_API_URL}api/user`, dataObject, {
-      headers: {
-        Authorization: `Basic ${token}`,
-      },
-    });
-    alert("Name has been updated successfully!");
+    const response = await axios.patch(
+      `${import.meta.env.VITE_API_URL}api/user`,
+      dataObject,
+      {
+        headers: {
+          Authorization: `Basic ${token}`,
+        },
+      }
+    );
+    alert(`${response.data.message}`);
   };
 
   return (
