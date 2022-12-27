@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
+import Events from "./pages/Events";
 import Login from "./pages/Login";
 import User from "./pages/User";
 
@@ -15,6 +16,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Login />}>
       <Route path="user" element={<User />} />
+      <Route path="events" element={<Events />} />
     </Route>
   )
 );
