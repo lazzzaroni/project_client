@@ -1,7 +1,6 @@
-import { TokenContext } from "@/context/tokenContext";
+import { useTokenContext } from "@/context/tokenContext";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import { Form } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 interface IUser {
   _id: string;
@@ -10,7 +9,7 @@ interface IUser {
 }
 
 export const User = () => {
-  const token = useContext(TokenContext);
+  const token = useTokenContext();
   const [userData, setUserData] = useState<IUser>();
 
   const getUserData = async () => {

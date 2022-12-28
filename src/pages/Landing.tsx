@@ -1,7 +1,6 @@
 import { Header } from "@/components";
-import { TokenContext } from "@/context/tokenContext";
+import { useTokenContext } from "@/context/tokenContext";
 import jwtDecode, { JwtPayload } from "jwt-decode";
-import { useContext } from "react";
 import { Outlet } from "react-router-dom";
 
 interface TokenData extends JwtPayload {
@@ -12,7 +11,7 @@ interface TokenData extends JwtPayload {
 }
 
 export const Landing = () => {
-  const token = useContext(TokenContext);
+  const token = useTokenContext();
   const decoded = jwtDecode<TokenData>(token as string);
 
   return (

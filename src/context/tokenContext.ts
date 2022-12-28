@@ -1,5 +1,9 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const TokenContext = createContext<string | null>(null);
 
-export { TokenContext };
+const useTokenContext = () => {
+  return useContext(TokenContext);
+};
+
+export { TokenContext, useTokenContext };
